@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Digital Clock</title>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .clock-container {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0ff;
+    }
+
+    .clock {
+      font-size: 50px;
+      font-family: 'Courier New', Courier, monospace;
+      color: #0ff;
+      letter-spacing: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <div id="clock" class="clock">00:00:00</div>
+  </div>
+<script>
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Convert 0 to 12
+    hours = hours.toString().padStart(2, '0');
+
+    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
